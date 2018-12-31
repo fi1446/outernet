@@ -13,8 +13,8 @@
   # 文章構造の把握に即した言葉を抽出することで、会話とは脈絡のない言葉の検索を防ぐ
   # なお、文章構造を把握する複数のパターンが返ってくる中、今回は便宜上、最初のパターンのみを取り出す
   # （タプル内の最初のパターンは、主語-述語の関係を表すパターンとなる）
-  queries = `python3 ./filter.py "#{text}"`.split
-  final_queries = `python3 cabocha.py "#{queries[0]}" "#{queries[1] || 'No-Text-Found'}" "#{text}"`.split
+  queries = `python3 ./filter_nouns.py "#{text}"`.split
+  final_queries = `python3 ./filter_structure.py "#{queries[0]}" "#{queries[1] || 'No-Text-Found'}" "#{text}"`.split
   final_queries = final_queries.take(2) if final_queries.size > 2
 
   # final_queriesが空の時、全てをやり直す
